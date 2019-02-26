@@ -1,18 +1,17 @@
 {
-  "name": "com.adaltojunior.cordova.plugin.wazenavigator",
+  "name": "com.xtraball.cordova.plugin.navigator",
   "version": "0.1.0",
-  "description": "Plugin to navigate using Waze.",
+  "description": "Plugin to navigate using Waze, Apple Maps, Google Maps.",
   "cordova": {
-    "id": "com.adaltojunior.cordova.plugin.wazenavigator",
+    "id": "com.xtraball.cordova.plugin.navigator",
     "platforms": [
-      "wp8",
       "android",
       "ios"
     ]
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/renanbandeira/cordova-waze-navigator.git"
+    "url": "git+https://github.com/xtraball/cordova-navigator.git"
   },
   "keywords": [
     "maps",
@@ -21,9 +20,7 @@
     "waze",
     "ios",
     "android",
-    "wp8",
     "ecosystem:cordova",
-    "cordova-wp8",
     "cordova-android",
     "cordova-ios"
   ],
@@ -33,10 +30,13 @@
       "version": ">=3.5.2"
     }
   ],
-  "author": "Adalto Junior",
+  "authors": [
+    "Xtraball",
+    "Adalto Junior"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/renanbandeira/cordova-waze-navigator/issues"
+    "url": "https://github.com/xtraball/cordova-navigator/issues"
   },
-  "homepage": "https://github.com/renanbandeira/cordova-waze-navigator#readme"
+  "homepage": "https://github.com/xtraball/cordova-navigator#readme"
 }

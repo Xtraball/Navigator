@@ -1,30 +1,23 @@
 //
-//  waze-navigator.m
-//  waze-navigator
-//
-//  Created by Adalto Junior on 7/21/15.
-//
 //
 
 #import <Cordova/CDV.h>
-#import "CDVWazeNavigator.h"
+#import "CDVNavigator.h"
 
-@implementation CDVWazeNavigator
+@implementation CDVNavigator
 
 - (void)openByUrl:(NSString *)url {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
-- (void)navigateByWaze:(CDVInvokedUrlCommand *)command {
+- (void)navigate:(CDVInvokedUrlCommand *)command {
     [self showAlert:command.arguments];
 }
 
 - (void)showAlert:(NSArray*) latlng {
-    
-    NSString *fromLat = [NSString stringWithFormat:@"%@",[latlng objectAtIndex:0]];
-    NSString *fromLng = [NSString stringWithFormat:@"%@",[latlng objectAtIndex:1]];
-    NSString *toLat = [NSString stringWithFormat:@"%@",[latlng objectAtIndex:2]];
-    NSString *toLng = [NSString stringWithFormat:@"%@",[latlng objectAtIndex:3]];
+
+    NSString *toLat = [NSString stringWithFormat:@"%@",[latlng objectAtIndex:0]];
+    NSString *toLng = [NSString stringWithFormat:@"%@",[latlng objectAtIndex:1]];
     
     UIAlertController * alert = [UIAlertController
                                  alertControllerWithTitle:nil
@@ -46,13 +39,25 @@
                                  actionWithTitle:@"Google Maps"
                                  style:UIAlertActionStyleDefault
                                  handler:^(UIAlertAction * action) {
-                                     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]]) {
-                                         [self openByUrl:[NSString stringWithFormat:@"comgooglemaps://?saddr=%f,%f&daddr=%f,%f",
-                                                          [fromLat doubleValue], [fromLng doubleValue],[toLat doubleValue], [toLng doubleValue]]];
+                                     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps-x-callback://"]]) {
+                                         [self openByUrl:[NSString stringWithFormat:@"comgooglemaps-x-callback://?daddr=%f,%f&x-success=sourceapp://?resume=true&x-source=NavigatorIntent",
+                                                          [toLat doubleValue], [toLng doubleValue]]];
                                      } else {
                                          [self openByUrl:@"https://itunes.apple.com/us/app/google-maps-transit-food/id585027354?mt=8"];
                                      }
                                  }];
+
+    UIAlertAction* appleMaps = [UIAlertAction
+                                  actionWithTitle:@"Apple Maps"
+                                  style:UIAlertActionStyleDefault
+                                  handler:^(UIAlertAction * action) {
+                                      if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"maps://"]]) {
+                                          [self openByUrl:[NSString stringWithFormat:@"maps://?q=%f,%f",
+                                                           [toLat doubleValue], [toLng doubleValue]]];
+                                      } else {
+                                          [self openByUrl:@"https://itunes.apple.com/us/app/maps/id915056765?mt=8"];
+                                      }
+                                  }];
     
     UIAlertAction* cancel = [UIAlertAction
                              actionWithTitle:@"OK"
@@ -63,6 +68,7 @@
     
     [alert addAction:waze];
     [alert addAction:googleMaps];
+    [alert addAction:appleMaps];
     [alert addAction:cancel];
     
     [self.viewController presentViewController:alert animated:YES completion:nil];

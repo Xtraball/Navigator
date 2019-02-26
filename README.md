@@ -1,14 +1,14 @@
-# cordova-waze-navigator
-Cordova's plugin to navigation using Waze
+# cordovanavigator
+Cordova's plugin to navigation using Waze, Apple Maps, Google Maps with intents
 
 # Installation
 
-`cordova plugin add https://github.com/adaltojunior86/cordova-waze-navigator.git`
+`cordova plugin add https://github.com/xtrball/cordova-navigator.git`
 
 # Usage
 
 ```
-WazeNavigator.navigateByPosition({
+Navigator.navigateByPosition({
     lat: 50, // latitude
     lng: -4 // longitude
 });
