@@ -6,7 +6,8 @@
     "id": "com.xtraball.cordova.plugin.navigator",
     "platforms": [
       "android",
-      "ios"
+      "ios",
+      "browser"
     ]
   },
   "repository": {

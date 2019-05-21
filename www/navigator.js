@@ -1,10 +1,9 @@
 /**
  *
- * @type {{navigateByPosition: Navigator.navigateByPosition}}
+ * @type {{navigate: Navigator.navigate}}
  */
 Navigator = {
-    navigateByPosition: function (to) {
-
+    navigate: function (to) {
         try {
             if (!isNaN(to.lat) && !isNaN(to.lng)) {
                 cordova.exec(
@@ -19,8 +18,6 @@ Navigator = {
         } catch (e) {
             console.error("Error on navigate by position: " + e.message);
         }
-
     }
-
 };
 module.exports = Navigator;
